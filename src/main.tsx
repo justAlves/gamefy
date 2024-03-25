@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding/index.tsx'
+import Login from './pages/Login/index.tsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <OnBoarding />
+  },
+  {
+    path: '/login',
+    element: <Login/>
   }
 ])
 

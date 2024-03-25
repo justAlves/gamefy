@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import GoogleLogo from '@/assets/google.svg'
-import TwitterLogo from '@/assets/twitter.svg'
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Eye, EyeOff } from 'lucide-react'
@@ -50,7 +49,6 @@ export default function Login() {
                 <Separator className="w-40"/>
             </div>
             <Button className="mt-4 font-bold gap-2"><img src={GoogleLogo} className="w-4 h-4"/>Entrar com o Google</Button>
-            <Button className="mt-4 font-bold gap-2"><img src={TwitterLogo} className="w-4 h-4"/>Entrar com o Twitter</Button>
             <a href="/register" className="text-sm mt-2 text-black/50 text-center hover:underline">Não possui uma conta? cadastre agora mesmo!</a>
         </div>
     </div>

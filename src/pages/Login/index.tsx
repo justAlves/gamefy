@@ -10,6 +10,7 @@ import {zodResolver} from '@hookform/resolvers/zod'
 import { useFirebase } from "@/services/firebase";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "@/contexts/user";
 
 const userSchema = z.object({ 
     password: z.string(),
@@ -23,6 +24,7 @@ export default function Login() {
     const [show, setShow] = useState(false);
 
     const { auth } = useFirebase()
+    const {actions: { setUser }} = useUserStore()
 
     const navigate = useNavigate()
 
@@ -39,14 +41,16 @@ export default function Login() {
         console.log(data)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         signInWithEmailAndPassword(auth, data.email, data.password).then(data => {
-            navigate("/dashboard")
+            navigate("/explore")
+            setUser(data.user)
         })
     }
 
     function handleGoogleLogin(){
         signInWithPopup(auth, provider).then(data => {
             GoogleAuthProvider.credentialFromResult(data)
-            navigate("/dashboard")
+            navigate("/explore")
+            setUser(data.user)
         })
     }
 

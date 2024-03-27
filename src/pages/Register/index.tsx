@@ -7,6 +7,7 @@ import {useForm} from 'react-hook-form'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { useFirebase } from "@/services/firebase";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth'
+import { useUserStore } from "@/contexts/user";
 
 const userSchema = z.object({ 
     username: z.string(),
@@ -23,6 +24,8 @@ type UserData = z.infer<typeof userSchema>
 export default function Register() {
     const { auth } = useFirebase()
 
+    const {actions: { setUser }} = useUserStore()
+
     const {register, handleSubmit} = useForm<UserData>({
         resolver: zodResolver(userSchema)
     })
@@ -37,7 +40,7 @@ export default function Register() {
         const response = await createUserWithEmailAndPassword(auth, data.email, data.password)    
         sendEmailVerification(response.user)
         updateProfile(response.user, {displayName: data.username})
-       
+        setUser(response.user)
     }
     
 

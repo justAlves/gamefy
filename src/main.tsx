@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import OnBoarding from './pages/OnBoarding/index.tsx'
 import Login from './pages/Login/index.tsx'
 import Register from './pages/Register/index.tsx'
-import Dashboard from './pages/Dashboard/index.tsx'
+import { ThemeProvider } from './components/ui/theme-provider.tsx'
+import Explore from './pages/Explore/index.tsx'
 
 const router = createBrowserRouter([
   {
@@ -21,13 +22,15 @@ const router = createBrowserRouter([
     element: <Register/>
   },
   {
-    path: '/dashboard',
-    element: <Dashboard/>
+    path: '/explore',
+    element: <Explore/>
   },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ThemeProvider>
+      <RouterProvider router={router}/>
+    </ThemeProvider>
   </React.StrictMode>,
 )
